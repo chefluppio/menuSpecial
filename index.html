@@ -71,6 +71,28 @@
       border: 2px solid #001f3f;
       text-align: center;
     }
+    .order-summary {
+      margin: 20px 12px;
+      padding: 12px;
+      border: 2px solid #001f3f;
+      border-radius: 16px;
+      background-color: #e0eaff;
+      min-height: 120px;
+    }
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid #ccc;
+    }
+    .order-item button {
+      background-color: #ff4d4d;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      padding: 2px 8px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -78,28 +100,31 @@
     menuSpecial
   </header>
   <main>
-    <div class="btn" oncontextmenu="editDish(event)">Penne al sugo</div>
-    <div class="btn" oncontextmenu="editDish(event)">Penne Zola e noci</div>
-    <div class="btn" oncontextmenu="editDish(event)">Penne all’arrabbiata</div>
-    <div class="btn" oncontextmenu="editDish(event)">Linguine alle vongole</div>
-    <div class="btn" oncontextmenu="editDish(event)">Linguine ai frutti di mare</div>
-    <div class="btn" oncontextmenu="editDish(event)">Tagliata al rosmarino</div>
-    <div class="btn" oncontextmenu="editDish(event)">Tagliata al pepe verde</div>
-    <div class="btn" oncontextmenu="editDish(event)">Grigliata mista</div>
-    <div class="btn" oncontextmenu="editDish(event)">Patatine</div>
-    <div class="btn" oncontextmenu="editDish(event)">Anelli di cipolla</div>
-    <div class="btn" oncontextmenu="editDish(event)">Olive ascolane</div>
-    <div class="btn" oncontextmenu="editDish(event)">Cotoletta baby con patate</div>
-    <div class="btn" oncontextmenu="editDish(event)">Hamburger baby con patate</div>
-    <div class="btn" oncontextmenu="editDish(event)">Hamburger con scamorza</div>
-    <div class="btn" oncontextmenu="editDish(event)">Hamburger con verdure o patate</div>
-    <div class="btn" oncontextmenu="editDish(event)">Tasto 16</div>
-    <div class="btn" oncontextmenu="editDish(event)">Tasto 17</div>
-    <div class="btn" oncontextmenu="editDish(event)">Tasto 18</div>
+    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Penne al sugo</div>
+    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Penne Zola e noci</div>
+    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Penne all’arrabbiata</div>
+    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Linguine alle vongole</div>
+    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Linguine ai frutti di mare</div>
+    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Tagliata al rosmarino</div>
+    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Tagliata al pepe verde</div>
+    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Grigliata mista</div>
+    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Patatine</div>
+    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Anelli di cipolla</div>
+    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Olive ascolane</div>
+    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Cotoletta baby con patate</div>
+    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Hamburger baby con patate</div>
+    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Hamburger con scamorza</div>
+    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Hamburger con verdure o patate</div>
+    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Tasto 16</div>
+    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Tasto 17</div>
+    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Tasto 18</div>
   </main>
   <div class="table-number-container">
     <label for="table-number">Numero Tavolo</label>
     <input type="number" id="table-number" placeholder="Inserisci numero tavolo">
+  </div>
+  <div class="order-summary" id="order-summary">
+    <strong>Comanda:</strong>
   </div>
   <script>
     function editDish(event) {
@@ -108,6 +133,21 @@
       if (nuovoNome !== null && nuovoNome.trim() !== '') {
         event.target.textContent = nuovoNome;
       }
+    }
+
+    function addToOrder(button) {
+      const orderSummary = document.getElementById('order-summary');
+      const itemName = button.textContent;
+
+      const orderItem = document.createElement('div');
+      orderItem.className = 'order-item';
+      orderItem.innerHTML = `${itemName} <button onclick='removeFromOrder(this)'>X</button>`;
+
+      orderSummary.appendChild(orderItem);
+    }
+
+    function removeFromOrder(btn) {
+      btn.parentElement.remove();
     }
   </script>
 </body>
