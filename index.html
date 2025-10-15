@@ -45,6 +45,7 @@
       text-align: center;
       white-space: normal;
       height: 100px;
+      user-select: none;
     }
     .btn:hover {
       transform: translateY(-2px);
@@ -57,24 +58,33 @@
     menuSpecial
   </header>
   <main>
-    <div class="btn">Penne al sugo</div>
-    <div class="btn">Penne Zola e noci</div>
-    <div class="btn">Penne all’arrabbiata</div>
-    <div class="btn">Linguine alle vongole</div>
-    <div class="btn">Linguine ai frutti di mare</div>
-    <div class="btn">Tagliata al rosmarino</div>
-    <div class="btn">Tagliata al pepe verde</div>
-    <div class="btn">Grigliata mista</div>
-    <div class="btn">Patatine</div>
-    <div class="btn">Anelli di cipolla</div>
-    <div class="btn">Olive ascolane</div>
-    <div class="btn">Cotoletta baby con patate</div>
-    <div class="btn">Hamburger baby con patate</div>
-    <div class="btn">Hamburger con scamorza</div>
-    <div class="btn">Hamburger con verdure o patate</div>
-    <div class="btn">Tasto 16</div>
-    <div class="btn">Tasto 17</div>
-    <div class="btn">Tasto 18</div>
+    <div class="btn" oncontextmenu="editDish(event)">Penne al sugo</div>
+    <div class="btn" oncontextmenu="editDish(event)">Penne Zola e noci</div>
+    <div class="btn" oncontextmenu="editDish(event)">Penne all’arrabbiata</div>
+    <div class="btn" oncontextmenu="editDish(event)">Linguine alle vongole</div>
+    <div class="btn" oncontextmenu="editDish(event)">Linguine ai frutti di mare</div>
+    <div class="btn" oncontextmenu="editDish(event)">Tagliata al rosmarino</div>
+    <div class="btn" oncontextmenu="editDish(event)">Tagliata al pepe verde</div>
+    <div class="btn" oncontextmenu="editDish(event)">Grigliata mista</div>
+    <div class="btn" oncontextmenu="editDish(event)">Patatine</div>
+    <div class="btn" oncontextmenu="editDish(event)">Anelli di cipolla</div>
+    <div class="btn" oncontextmenu="editDish(event)">Olive ascolane</div>
+    <div class="btn" oncontextmenu="editDish(event)">Cotoletta baby con patate</div>
+    <div class="btn" oncontextmenu="editDish(event)">Hamburger baby con patate</div>
+    <div class="btn" oncontextmenu="editDish(event)">Hamburger con scamorza</div>
+    <div class="btn" oncontextmenu="editDish(event)">Hamburger con verdure o patate</div>
+    <div class="btn" oncontextmenu="editDish(event)">Tasto 16</div>
+    <div class="btn" oncontextmenu="editDish(event)">Tasto 17</div>
+    <div class="btn" oncontextmenu="editDish(event)">Tasto 18</div>
   </main>
+  <script>
+    function editDish(event) {
+      event.preventDefault();
+      let nuovoNome = prompt('Modifica il nome del piatto:', event.target.textContent);
+      if (nuovoNome !== null && nuovoNome.trim() !== '') {
+        event.target.textContent = nuovoNome;
+      }
+    }
+  </script>
 </body>
 </html>
