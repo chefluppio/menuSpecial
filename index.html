@@ -51,6 +51,26 @@
       transform: translateY(-2px);
       box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 2px 5px rgba(255,255,255,0.2);
     }
+    .table-number-container {
+      margin: 20px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .table-number-container label {
+      font-size: 1.2em;
+      margin-bottom: 8px;
+      color: #001f3f;
+      font-weight: bold;
+    }
+    .table-number-container input {
+      font-size: 1.5em;
+      padding: 10px;
+      width: 80%;
+      border-radius: 12px;
+      border: 2px solid #001f3f;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -77,6 +97,10 @@
     <div class="btn" oncontextmenu="editDish(event)">Tasto 17</div>
     <div class="btn" oncontextmenu="editDish(event)">Tasto 18</div>
   </main>
+  <div class="table-number-container">
+    <label for="table-number">Numero Tavolo</label>
+    <input type="number" id="table-number" placeholder="Inserisci numero tavolo">
+  </div>
   <script>
     function editDish(event) {
       event.preventDefault();
