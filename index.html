@@ -93,6 +93,18 @@
       padding: 2px 8px;
       cursor: pointer;
     }
+    .send-btn {
+      display: block;
+      width: 90%;
+      margin: 20px auto;
+      padding: 15px;
+      font-size: 1.2em;
+      background-color: #25D366;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -126,6 +138,7 @@
   <div class="order-summary" id="order-summary">
     <strong>Comanda:</strong>
   </div>
+  <button class="send-btn" onclick="sendOrder()">Invia Comanda WhatsApp</button>
   <script>
     function editDish(event) {
       event.preventDefault();
@@ -148,6 +161,23 @@
 
     function removeFromOrder(btn) {
       btn.parentElement.remove();
+    }
+
+    function sendOrder() {
+      const tableNumber = document.getElementById('table-number').value;
+      if (!tableNumber) {
+        alert('Devi inserire il numero del tavolo prima di inviare la comanda.');
+        return;
+      }
+      const orderItems = Array.from(document.querySelectorAll('.order-item')).map(i => i.textContent.replace(' X',''));
+      if (orderItems.length === 0) {
+        alert('La comanda è vuota. Aggiungi almeno un piatto.');
+        return;
+      }
+      const message = encodeURIComponent('Comanda: ' + orderItems.join(', '));
+      const phone = '3491167434';
+      const whatsappURL = `https://wa.me/${phone}?text=${message}`;
+      window.open(whatsappURL, '_blank');
     }
   </script>
 </body>
