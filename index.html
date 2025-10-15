@@ -13,13 +13,36 @@
       color: #222;
     }
     header {
-      background-color: #001f3f; /* blu scuro */
+      background-color: #001f3f;
       color: white;
       text-align: center;
-      padding: 16px 0;
-      font-size: 1.5em;
+      padding: 32px 0;
+      font-size: 2em;
       letter-spacing: 1px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+    main {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding: 12px;
+    }
+    .btn {
+      background: linear-gradient(145deg, #001f3f, #003366);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 16px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.3), inset 0 2px 5px rgba(255,255,255,0.1);
+      font-size: 1em;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 2px 5px rgba(255,255,255,0.2);
     }
   </style>
 </head>
@@ -27,5 +50,26 @@
   <header>
     menuSpecial
   </header>
+  <main>
+    <!-- 18 bottoni -->
+    <div class="btn">Tasto 1</div>
+    <div class="btn">Tasto 2</div>
+    <div class="btn">Tasto 3</div>
+    <div class="btn">Tasto 4</div>
+    <div class="btn">Tasto 5</div>
+    <div class="btn">Tasto 6</div>
+    <div class="btn">Tasto 7</div>
+    <div class="btn">Tasto 8</div>
+    <div class="btn">Tasto 9</div>
+    <div class="btn">Tasto 10</div>
+    <div class="btn">Tasto 11</div>
+    <div class="btn">Tasto 12</div>
+    <div class="btn">Tasto 13</div>
+    <div class="btn">Tasto 14</div>
+    <div class="btn">Tasto 15</div>
+    <div class="btn">Tasto 16</div>
+    <div class="btn">Tasto 17</div>
+    <div class="btn">Tasto 18</div>
+  </main>
 </body>
 </html>
