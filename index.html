@@ -82,6 +82,7 @@
     .order-item {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       padding: 6px 0;
       border-bottom: 1px solid #ccc;
     }
@@ -92,6 +93,13 @@
       border-radius: 8px;
       padding: 2px 8px;
       cursor: pointer;
+      margin-left: 10px;
+    }
+    .order-item input {
+      width: 50px;
+      margin-left: 10px;
+      text-align: center;
+      font-size: 1em;
     }
     .send-btn {
       display: block;
@@ -127,18 +135,19 @@
     <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Hamburger baby con patate</div>
     <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Hamburger con scamorza</div>
     <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Hamburger con verdure o patate</div>
-    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Tasto 16</div>
-    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Tasto 17</div>
-    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Tasto 18</div>
   </main>
+
   <div class="table-number-container">
     <label for="table-number">Numero Tavolo</label>
     <input type="number" id="table-number" placeholder="Inserisci numero tavolo">
   </div>
+
   <div class="order-summary" id="order-summary">
     <strong>Comanda:</strong>
   </div>
+
   <button class="send-btn" onclick="sendOrder()">Invia Comanda WhatsApp</button>
+
   <script>
     function editDish(event) {
       event.preventDefault();
@@ -152,9 +161,14 @@
       const orderSummary = document.getElementById('order-summary');
       const itemName = button.textContent;
 
+      let quantity = prompt('Inserisci la quantità del piatto:','1');
+      if (quantity === null || quantity.trim() === '' || isNaN(quantity) || parseInt(quantity) <= 0) {
+        quantity = 1;
+      }
+
       const orderItem = document.createElement('div');
       orderItem.className = 'order-item';
-      orderItem.innerHTML = `${itemName} <button onclick='removeFromOrder(this)'>X</button>`;
+      orderItem.innerHTML = `${itemName} x <input type='number' value='${quantity}' min='1'> <button onclick='removeFromOrder(this)'>X</button>`;
 
       orderSummary.appendChild(orderItem);
     }
@@ -169,11 +183,18 @@
         alert('Devi inserire il numero del tavolo prima di inviare la comanda.');
         return;
       }
-      const orderItems = Array.from(document.querySelectorAll('.order-item')).map(i => i.textContent.replace(' X',''));
+
+      const orderItems = Array.from(document.querySelectorAll('.order-item')).map(i => {
+        const name = i.querySelector('input').previousSibling.textContent.trim() || i.textContent.split(' x ')[0];
+        const quantity = i.querySelector('input').value;
+        return `${name} x${quantity}`;
+      });
+
       if (orderItems.length === 0) {
         alert('La comanda è vuota. Aggiungi almeno un piatto.');
         return;
       }
+
       const message = encodeURIComponent('Comanda: ' + orderItems.join(', '));
       const phone = '3491167434';
       const whatsappURL = `https://wa.me/${phone}?text=${message}`;
