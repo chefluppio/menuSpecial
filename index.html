@@ -84,29 +84,41 @@
     margin: 5px 0;
   }
 
-  /* Pulsante WhatsApp */
+  /* Pulsante WhatsApp largo */
   #sendOrder {
     margin-top: 30px;
+    width: 90%;
+    max-width: 500px;
     background-color: #25D366;
     color: white;
     border: none;
-    padding: 20px 50px;
+    padding: 20px;
     border-radius: 20px;
     font-size: 22px;
     font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
     box-shadow: 0 6px 12px rgba(0,0,0,0.3);
     transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
   }
 
   #sendOrder:hover {
-    background-color: #20b85a;
-    transform: scale(1.05);
+    background-color: #1EBE5C;
+    transform: scale(1.03);
     box-shadow: 0 8px 15px rgba(0,0,0,0.4);
   }
 
   #sendOrder:active {
     transform: scale(0.97);
     background-color: #1a8d49;
+  }
+
+  #sendOrder svg {
+    width: 28px;
+    height: 28px;
+    fill: white;
   }
 </style>
 </head>
@@ -142,7 +154,12 @@
   <div id="orders"></div>
 </div>
 
-<button id="sendOrder">📩 Invia Ordine</button>
+<button id="sendOrder">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+    <path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.64.857 5.08 2.32 7.076L5 29l7.12-2.32A11.96 11.96 0 0 0 16.001 27c6.627 0 12-5.373 12-12S22.628 3 16.001 3zm0 21.7a9.63 9.63 0 0 1-5.07-1.4l-.36-.22-4.21 1.37 1.38-4.09-.24-.37A9.63 9.63 0 0 1 6.4 15c0-5.31 4.29-9.6 9.6-9.6s9.6 4.29 9.6 9.6-4.29 9.7-9.6 9.7zm5.31-7.26c-.29-.15-1.7-.84-1.96-.93-.26-.1-.45-.15-.64.15s-.74.93-.9 1.12-.33.22-.62.07-1.2-.44-2.29-1.4c-.85-.76-1.42-1.7-1.59-1.98-.16-.29-.02-.44.12-.59.12-.12.29-.33.44-.5.15-.17.2-.29.29-.48.1-.19.05-.36-.02-.51-.07-.15-.64-1.54-.88-2.12-.23-.56-.47-.49-.64-.5h-.54c-.19 0-.5.07-.76.36s-1 1-.99 2.43 1.02 2.81 1.17 3c.15.19 2 3.07 4.88 4.3 1.82.79 2.53.86 3.43.72.55-.08 1.7-.7 1.94-1.37.24-.68.24-1.26.17-1.38-.07-.12-.26-.19-.55-.33z"/>
+  </svg>
+  Invia ordine
+</button>
 
 <script>
   const buttons = document.querySelectorAll('.button');
