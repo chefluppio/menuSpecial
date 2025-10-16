@@ -1,207 +1,197 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>menuSpecial</title>
-  <link href="https://fonts.googleapis.com/css2?family=BBH+Sans+Hegarty&display=swap" rel="stylesheet">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=BBH+Sans+Hegarty&display=swap');
+
     body {
       margin: 0;
-      font-family: 'BBH Sans Hegarty', Arial, sans-serif;
-      background-color: #f5f5f5;
-      color: #222;
+      background-color: #f4f4f4;
+      font-family: 'BBH Sans Hegarty', sans-serif;
+      text-align: center;
     }
+
     header {
-      background-color: #001f3f;
+      background-color: #0b3d91;
       color: white;
-      text-align: center;
-      padding: 32px 0;
+      padding: 40px 0;
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
       font-size: 2em;
-      letter-spacing: 1px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-      border-bottom-left-radius: 20px;
-      border-bottom-right-radius: 20px;
-    }
-    main {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      padding: 12px;
-    }
-    .btn {
-      background: linear-gradient(145deg, #001f3f, #003366);
-      color: white;
-      padding: 20px;
-      text-align: center;
-      border-radius: 16px;
-      box-shadow: 0 8px 15px rgba(0,0,0,0.3), inset 0 2px 5px rgba(255,255,255,0.1);
-      font-size: 0,9em;
-      cursor: pointer;
-      transition: all 0.2s ease-in-out;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      white-space: normal;
-      height: 100px;
-      user-select: none;
-    }
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 2px 5px rgba(255,255,255,0.2);
-    }
-    .table-number-container {
-      margin: 20px 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .table-number-container label {
-      font-size: 1.2em;
-      margin-bottom: 8px;
-      color: #001f3f;
       font-weight: bold;
     }
-    .table-number-container input {
-      font-size: 1.5em;
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       padding: 10px;
-      width: 80%;
-      border-radius: 12px;
-      border: 2px solid #001f3f;
+    }
+
+    button {
+      width: 48%;               /* più grandi e meglio distribuiti */
+      margin: 10px;
+      padding: 25px;            /* altezza aumentata */
+      border: none;
+      border-radius: 15px;
+      background: linear-gradient(145deg, #0b3d91, #0a2c6b);
+      color: white;
+      font-size: 22px;          /* testo più grande */
+      font-family: 'BBH Sans Hegarty', sans-serif;
+      font-weight: bold;
+      box-shadow: 4px 4px 10px rgba(0,0,0,0.3), inset 2px 2px 5px rgba(255,255,255,0.2);
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    #tavolo-section {
+      margin: 20px 0;
+    }
+
+    #numeroTavolo {
+      font-size: 24px;
+      padding: 10px;
+      width: 60%;
       text-align: center;
+      border: 2px solid #0b3d91;
+      border-radius: 10px;
     }
-    .order-summary {
-      margin: 20px 12px;
-      padding: 12px;
-      border: 2px solid #001f3f;
-      border-radius: 16px;
-      background-color: #e0eaff;
-      min-height: 120px;
+
+    #comanda {
+      margin: 20px;
+      padding: 10px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
-    .order-item {
+
+    .item {
+      font-size: 18px;
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      padding: 6px 0;
-      border-bottom: 1px solid #ccc;
+      padding: 5px 10px;
     }
-    .order-item button {
-      background-color: #ff4d4d;
-      border: none;
+
+    .remove {
+      background: red;
       color: white;
+      border: none;
       border-radius: 8px;
-      padding: 2px 8px;
       cursor: pointer;
-      margin-left: 10px;
     }
-    .order-item input {
-      width: 50px;
-      margin-left: 10px;
-      text-align: center;
-      font-size: 1em;
-    }
-    .send-btn {
-      display: block;
-      width: 90%;
-      margin: 20px auto;
-      padding: 15px;
-      font-size: 1.2em;
-      background-color: #25D366;
+
+    #invia {
+      background-color: green;
       color: white;
+      font-size: 22px;
+      padding: 15px 30px;
       border: none;
-      border-radius: 12px;
+      border-radius: 20px;
       cursor: pointer;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
   </style>
 </head>
 <body>
-  <header>
-    menuSpecial
-  </header>
-  <main>
-     <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Penne al sugo</div>
-    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Penne Zola e noci</div>
-    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Penne all’arrabbiata</div>
-    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Linguine alle vongole</div>
-    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Linguine ai frutti di mare</div>
-    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Tagliata al rosmarino</div>
-    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Tagliata al pepe verde</div>
-    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Grigliata mista</div>
-    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Patatine</div>
-    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Anelli di cipolla</div>
-    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Olive ascolane</div>
-    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Cotoletta baby con patate</div>
-    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Hamburger baby con patate</div>
-    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Hamburger con scamorza</div>
-    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Hamburger con verdure o patate</div>
-    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Patatine</div>
-    <div class="btn" oncontextmenu="editDish(event)" onclick="addToOrder(this)">Verdure</div>
-  </main>
+  <header>menuSpecial</header>
 
-  <div class="table-number-container">
-    <label for="table-number">Numero Tavolo</label>
-    <input type="number" id="table-number" placeholder="Inserisci numero tavolo">
+  <div class="container">
+    <button>Penne al sugo</button>
+    <button>Penne Zola e noci</button>
+    <button>Penne all’arrabbiata</button>
+    <button>Linguine alle vongole</button>
+    <button>Linguine ai frutti di mare</button>
+    <button>Tagliata al rosmarino</button>
+    <button>Tagliata al pepe verde</button>
+    <button>Grigliata mista</button>
+    <button>Patatine</button>
+    <button>Anelli di cipolla</button>
+    <button>Olive ascolane</button>
+    <button>Cotoletta baby con patate</button>
+    <button>Hamburger baby con patate</button>
+    <button>Hamburger con scamorza</button>
+    <button>Hamburger con verdure o patate</button>
   </div>
 
-  <div class="order-summary" id="order-summary">
-    <strong>Comanda:</strong>
+  <div id="tavolo-section">
+    <label for="numeroTavolo" style="font-size:24px; font-weight:bold;">Numero Tavolo:</label><br>
+    <input type="number" id="numeroTavolo" placeholder="Inserisci numero tavolo" />
   </div>
 
-  <button class="send-btn" onclick="sendOrder()">Invia Comanda WhatsApp</button>
+  <div id="comanda">
+    <h2>Comanda</h2>
+    <div id="listaComanda"></div>
+  </div>
+
+  <button id="invia">Invia Comanda WhatsApp</button>
 
   <script>
-    function editDish(event) {
-      event.preventDefault();
-      let nuovoNome = prompt('Modifica il nome del piatto:', event.target.textContent);
-      if (nuovoNome !== null && nuovoNome.trim() !== '') {
-        event.target.textContent = nuovoNome;
-      }
-    }
+    const buttons = document.querySelectorAll('button:not(#invia)');
+    const listaComanda = document.getElementById('listaComanda');
+    const invia = document.getElementById('invia');
+    const numeroTavolo = document.getElementById('numeroTavolo');
+    const telefono = "3491167434";
+    let comanda = [];
 
-    function addToOrder(button) {
-      const orderSummary = document.getElementById('order-summary');
-      const itemName = button.textContent;
-
-      let quantity = prompt('Inserisci la quantità del piatto:','1');
-      if (quantity === null || quantity.trim() === '' || isNaN(quantity) || parseInt(quantity) <= 0) {
-        quantity = 1;
-      }
-
-      const orderItem = document.createElement('div');
-      orderItem.className = 'order-item';
-      orderItem.innerHTML = `${itemName} x <input type='number' value='${quantity}' min='1'> <button onclick='removeFromOrder(this)'>X</button>`;
-
-      orderSummary.appendChild(orderItem);
-    }
-
-    function removeFromOrder(btn) {
-      btn.parentElement.remove();
-    }
-
-    function sendOrder() {
-      const tableNumber = document.getElementById('table-number').value;
-      if (!tableNumber) {
-        alert('Devi inserire il numero del tavolo prima di inviare la comanda.');
-        return;
-      }
-
-      const orderItems = Array.from(document.querySelectorAll('.order-item')).map(i => {
-        const name = i.querySelector('input').previousSibling.textContent.trim() || i.textContent.split(' x ')[0];
-        const quantity = i.querySelector('input').value;
-        return `${name} x${quantity}`;
+    buttons.forEach(btn => {
+      btn.addEventListener('contextmenu', e => {
+        e.preventDefault();
+        const nuovoNome = prompt("Modifica il nome del piatto:", btn.innerText);
+        if (nuovoNome) btn.innerText = nuovoNome;
       });
 
-      if (orderItems.length === 0) {
-        alert('La comanda è vuota. Aggiungi almeno un piatto.');
+      btn.addEventListener('click', () => {
+        const quantita = prompt(`Quante porzioni di "${btn.innerText}"?`, "1");
+        if (quantita && !isNaN(quantita) && quantita > 0) {
+          const piatto = { nome: btn.innerText, quantita: parseInt(quantita) };
+          comanda.push(piatto);
+          aggiornaComanda();
+        }
+      });
+    });
+
+    function aggiornaComanda() {
+      listaComanda.innerHTML = "";
+      comanda.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = 'item';
+        div.innerHTML = `${item.nome} x${item.quantita} <button class="remove" onclick="rimuovi(${index})">X</button>`;
+        listaComanda.appendChild(div);
+      });
+    }
+
+    function rimuovi(index) {
+      comanda.splice(index, 1);
+      aggiornaComanda();
+    }
+
+    invia.addEventListener('click', () => {
+      const tavolo = numeroTavolo.value.trim();
+      if (!tavolo) {
+        alert("Inserisci il numero del tavolo prima di inviare la comanda.");
         return;
       }
 
-      const message = encodeURIComponent('Comanda: ' + orderItems.join(', '));
-      const phone = '3491167434';
-      const whatsappURL = `https://wa.me/${phone}?text=${message}`;
-      window.open(whatsappURL, '_blank');
-    }
+      if (comanda.length === 0) {
+        alert("Nessun piatto nella comanda!");
+        return;
+      }
+
+      let testo = `COMANDA TAVOLO ${tavolo}:%0A`;
+      comanda.forEach(item => {
+        testo += `- ${item.nome} x${item.quantita}%0A`;
+      });
+
+      window.open(`https://wa.me/${telefono}?text=${testo}`, "_blank");
+    });
   </script>
 </body>
 </html>
