@@ -298,7 +298,7 @@
     window.open(whatsappURL, '_blank');
   });
 
-  // Aggiungi nuovo pulsante cliccando in area libera
+  // Aggiungi nuovo pulsante cliccando in area libera con effetto 3D
   document.body.addEventListener('click', (e) => {
     if (e.target.closest('.button') || e.target.closest('#sendOrder') || e.target.closest('#tableNumber') || e.target.closest('#slideMenu') || e.target.closest('#menuIcon')) return;
     const newName = prompt("Inserisci il nome del nuovo piatto:");
@@ -306,17 +306,34 @@
       const newButton = document.createElement('button');
       newButton.className = 'button';
       newButton.textContent = newName;
+
+      // Effetto 3D identico ai pulsanti predefiniti
+      newButton.addEventListener('mousedown', () => {
+        newButton.style.transform = 'scale(0.95) translateY(2px)';
+        newButton.style.boxShadow = 'inset 3px 3px 8px rgba(0,0,0,0.6)';
+      });
+      newButton.addEventListener('mouseup', () => {
+        newButton.style.transform = '';
+        newButton.style.boxShadow = '3px 3px 8px rgba(0,0,0,0.5), -3px -3px 8px rgba(255,255,255,0.1)';
+      });
+      newButton.addEventListener('mouseleave', () => {
+        newButton.style.transform = '';
+        newButton.style.boxShadow = '3px 3px 8px rgba(0,0,0,0.5), -3px -3px 8px rgba(255,255,255,0.1)';
+      });
+
       newButton.addEventListener('click', () => {
         const existingOrder = orders.find(o => o.name === newName);
         if (existingOrder) existingOrder.qty++;
         else orders.push({name: newName, qty:1});
         renderOrders();
       });
+
       newButton.addEventListener('contextmenu', (ev) => {
         ev.preventDefault();
         const updatedName = prompt("Modifica nome del piatto:", newButton.textContent);
         if (updatedName) newButton.textContent = updatedName;
       });
+
       document.getElementById('buttonGrid').appendChild(newButton);
     }
   });
