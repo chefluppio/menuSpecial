@@ -36,10 +36,10 @@
   .button {
     background: linear-gradient(145deg, #003366, #001a33);
     color: white;
-    padding: 15px;
+    padding: 20px;
     border: none;
     border-radius: 20px;
-    font-size: 16px;
+    font-size: 20px;
     text-align: center;
     box-shadow: 3px 3px 8px rgba(0,0,0,0.5), -3px -3px 8px rgba(255,255,255,0.1);
     transition: transform 0.2s, box-shadow 0.2s;
@@ -84,19 +84,29 @@
     margin: 5px 0;
   }
 
+  /* Pulsante WhatsApp */
   #sendOrder {
-    margin-top: 25px;
-    background-color: #002b5b;
+    margin-top: 30px;
+    background-color: #25D366;
     color: white;
     border: none;
-    padding: 15px 30px;
-    border-radius: 15px;
-    font-size: 18px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    padding: 20px 50px;
+    border-radius: 20px;
+    font-size: 22px;
+    font-weight: bold;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+  }
+
+  #sendOrder:hover {
+    background-color: #20b85a;
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.4);
   }
 
   #sendOrder:active {
-    background-color: #001a33;
+    transform: scale(0.97);
+    background-color: #1a8d49;
   }
 </style>
 </head>
@@ -120,11 +130,6 @@
   <button class="button">Hamburger baby con patate</button>
   <button class="button">Hamburger con scamorza</button>
   <button class="button">Hamburger con verdure o patate</button>
-  <button class="button">Patatine</button>
-  <button class="button">Verdure</button>
-  <button class="button">Inserisci piatto</button>
-  <button class="button">Inserisci piatto</button>
-  <button class="button">Inserisci piatto</button>
 </div>
 
 <div id="tableNumberContainer">
@@ -137,7 +142,7 @@
   <div id="orders"></div>
 </div>
 
-<button id="sendOrder">Invia Ordine</button>
+<button id="sendOrder">📩 Invia Ordine</button>
 
 <script>
   const buttons = document.querySelectorAll('.button');
