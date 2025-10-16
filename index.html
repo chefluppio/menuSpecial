@@ -52,11 +52,11 @@
     font-size: 20px;
     text-align: center;
     box-shadow: 3px 3px 8px rgba(0,0,0,0.5), -3px -3px 8px rgba(255,255,255,0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
 
   .button:active {
-    transform: scale(0.95);
+    transform: scale(0.95) translateY(2px);
     box-shadow: inset 3px 3px 8px rgba(0,0,0,0.6);
   }
 
@@ -134,7 +134,7 @@
   #slideMenu {
     position: fixed;
     top: 0;
-    left: 0;
+    left: -320px;
     width: 300px;
     height: 100%;
     background-color: #002b5b;
@@ -142,11 +142,11 @@
     padding: 20px;
     overflow-y: auto;
     z-index: 1000;
-    display: none; /* menu nascosto */
+    transition: left 0.3s ease;
   }
 
   #slideMenu.active {
-    display: block; /* menu visibile */
+    left: 0;
   }
 
   #slideMenu h2 {
