@@ -26,7 +26,6 @@
     position: relative;
   }
 
-  /* Icona menu */
   #menuIcon {
     position: absolute;
     left: 15px;
@@ -131,7 +130,7 @@
     fill: white;
   }
 
-  /* Menu a locandina corretto */
+  /* Menu a locandina */
   #slideMenu {
     position: fixed;
     top: 0;
@@ -168,7 +167,6 @@
     font-size: 24px;
     cursor: pointer;
   }
-
 </style>
 </head>
 <body>
@@ -187,6 +185,7 @@
   <p><strong>Numero tavolo:</strong> inserisci il numero del tavolo nello spazio dedicato prima di inviare l'ordine. L'app non invierà l'ordine se manca.</p>
   <p><strong>Comanda:</strong> in basso vedi cosa hai selezionato. Puoi aumentare, diminuire o rimuovere i piatti direttamente da qui.</p>
   <p><strong>Invio ordine:</strong> premi il pulsante verde con logo WhatsApp per inviare l'ordine al numero della cucina. La comanda verrà inviata con quantità e nomi dei piatti.</p>
+  <p><strong>Aggiungere nuovi piatti:</strong> se hai bisogno di un piatto non presente nei pulsanti, clicca in uno spazio vuoto dello schermo e inserisci il nome del nuovo piatto. Verrà creato un pulsante personalizzato immediatamente pronto per essere selezionato.</p>
 </div>
 
 <div class="grid" id="buttonGrid">
@@ -231,36 +230,12 @@
   const sendButton = document.getElementById('sendOrder');
   let orders = [];
 
-  // gestione menu slide
   const menuIcon = document.getElementById('menuIcon');
   const slideMenu = document.getElementById('slideMenu');
   const slideMenuClose = document.getElementById('slideMenuClose');
 
-  menuIcon.addEventListener('click', () => {
-    slideMenu.classList.add('active');
-  });
-
-  slideMenuClose.addEventListener('click', () => {
-    slideMenu.classList.remove('active');
-  });
-
-  buttons.forEach(button => {
-    button.addEventListener('click', () => {
-      const existingOrder = orders.find(o => o.name === button.textContent);
-      if (existingOrder) {
-        existingOrder.qty++;
-      } else {
-        orders.push({ name: button.textContent, qty: 1 });
-      }
-      renderOrders();
-    });
-
-    button.addEventListener('contextmenu', (e) => {
-      e.preventDefault();
-      const newName = prompt("Modifica nome del piatto:", button.textContent);
-      if (newName) button.textContent = newName;
-    });
-  });
+  menuIcon.addEventListener('click', () => slideMenu.classList.add('active'));
+  slideMenuClose.addEventListener('click', () => slideMenu.classList.remove('active'));
 
   function renderOrders() {
     ordersDiv.innerHTML = '';
@@ -280,11 +255,8 @@
   }
 
   function decrease(i) {
-    if (orders[i].qty > 1) {
-      orders[i].qty--;
-    } else {
-      orders.splice(i, 1);
-    }
+    if (orders[i].qty > 1) orders[i].qty--;
+    else orders.splice(i, 1);
     renderOrders();
   }
 
@@ -298,16 +270,25 @@
     renderOrders();
   }
 
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const existing = orders.find(o => o.name === button.textContent);
+      if (existing) existing.qty++;
+      else orders.push({name: button.textContent, qty:1});
+      renderOrders();
+    });
+
+    button.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      const newName = prompt("Modifica nome del piatto:", button.textContent);
+      if (newName) button.textContent = newName;
+    });
+  });
+
   sendButton.addEventListener('click', () => {
     const tableNumber = tableInput.value.trim();
-    if (!tableNumber) {
-      alert("Inserisci il numero del tavolo prima di inviare l'ordine!");
-      return;
-    }
-    if (orders.length === 0) {
-      alert("Nessun piatto selezionato!");
-      return;
-    }
+    if (!tableNumber) { alert("Inserisci il numero del tavolo prima di inviare l'ordine!"); return; }
+    if (orders.length === 0) { alert("Nessun piatto selezionato!"); return; }
 
     const orderText = orders.map(o => `${o.name} x${o.qty}`).join('\n');
     const message = `Ordine tavolo ${tableNumber}:\n${orderText}`;
@@ -315,7 +296,29 @@
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappURL, '_blank');
   });
-</script>
 
+  // Aggiungi nuovo pulsante cliccando in area libera
+  document.body.addEventListener('click', (e) => {
+    if (e.target.closest('.button') || e.target.closest('#sendOrder') || e.target.closest('#tableNumber') || e.target.closest('#slideMenu') || e.target.closest('#menuIcon')) return;
+    const newName = prompt("Inserisci il nome del nuovo piatto:");
+    if (newName) {
+      const newButton = document.createElement('button');
+      newButton.className = 'button';
+      newButton.textContent = newName;
+      newButton.addEventListener('click', () => {
+        const existingOrder = orders.find(o => o.name === newName);
+        if (existingOrder) existingOrder.qty++;
+        else orders.push({name: newName, qty:1});
+        renderOrders();
+      });
+      newButton.addEventListener('contextmenu', (ev) => {
+        ev.preventDefault();
+        const updatedName = prompt("Modifica nome del piatto:", newButton.textContent);
+        if (updatedName) newButton.textContent = updatedName;
+      });
+      document.getElementById('buttonGrid').appendChild(newButton);
+    }
+  });
+</script>
 </body>
 </html>
