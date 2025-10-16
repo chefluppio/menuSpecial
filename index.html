@@ -23,6 +23,17 @@
     font-size: 26px;
     font-weight: bold;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+  }
+
+  /* Icona menu */
+  #menuIcon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 28px;
+    cursor: pointer;
   }
 
   .grid {
@@ -84,7 +95,6 @@
     margin: 5px 0;
   }
 
-  /* Pulsante WhatsApp largo */
   #sendOrder {
     margin-top: 30px;
     width: 90%;
@@ -120,11 +130,60 @@
     height: 28px;
     fill: white;
   }
+
+  /* Menu a locandina */
+  #slideMenu {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100%;
+    background-color: #002b5b;
+    color: white;
+    padding: 20px;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+    z-index: 1000;
+  }
+
+  #slideMenu h2 {
+    margin-top: 0;
+    color: #fff;
+  }
+
+  #slideMenu p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #ddd;
+  }
+
+  #slideMenuClose {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
 </style>
 </head>
 <body>
 
-<header>menuSpecial</header>
+<header>
+  <div id="menuIcon">&#9776;</div>
+  menuSpecial
+</header>
+
+<div id="slideMenu">
+  <div id="slideMenuClose">&times;</div>
+  <h2>Come funziona l'app</h2>
+  <p>Benvenuto! Questa app ti permette di creare e inviare le comande direttamente dalla sala in cucina.</p>
+  <p><strong>Selezione piatti:</strong> premi uno dei pulsanti dei piatti per aggiungerlo alla comanda. Ogni clic aumenta la quantità.</p>
+  <p><strong>Modifica piatti:</strong> tieni premuto un pulsante per modificare il nome del piatto e personalizzare la comanda.</p>
+  <p><strong>Numero tavolo:</strong> inserisci il numero del tavolo nello spazio dedicato prima di inviare l'ordine. L'app non invierà l'ordine se manca.</p>
+  <p><strong>Comanda:</strong> in basso vedi cosa hai selezionato. Puoi aumentare, diminuire o rimuovere i piatti direttamente da qui.</p>
+  <p><strong>Invio ordine:</strong> premi il pulsante verde con logo WhatsApp per inviare l'ordine al numero della cucina. La comanda verrà inviata con quantità e nomi dei piatti.</p>
+</div>
 
 <div class="grid" id="buttonGrid">
   <button class="button">Penne al sugo</button>
@@ -167,6 +226,19 @@
   const tableInput = document.getElementById('tableNumber');
   const sendButton = document.getElementById('sendOrder');
   let orders = [];
+
+  // gestione menu slide
+  const menuIcon = document.getElementById('menuIcon');
+  const slideMenu = document.getElementById('slideMenu');
+  const slideMenuClose = document.getElementById('slideMenuClose');
+
+  menuIcon.addEventListener('click', () => {
+    slideMenu.style.left = '0';
+  });
+
+  slideMenuClose.addEventListener('click', () => {
+    slideMenu.style.left = '-300px';
+  });
 
   buttons.forEach(button => {
     button.addEventListener('click', () => {
