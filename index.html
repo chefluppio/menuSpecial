@@ -135,7 +135,7 @@
   #slideMenu {
     position: fixed;
     top: 0;
-    left: -300px;
+    left: -320px; /* menu nascosto */
     width: 300px;
     height: 100%;
     background-color: #002b5b;
@@ -144,6 +144,10 @@
     transition: left 0.3s ease;
     overflow-y: auto;
     z-index: 1000;
+  }
+
+  #slideMenu.active {
+    left: 0; /* menu visibile */
   }
 
   #slideMenu h2 {
@@ -233,11 +237,11 @@
   const slideMenuClose = document.getElementById('slideMenuClose');
 
   menuIcon.addEventListener('click', () => {
-    slideMenu.style.left = '0';
+    slideMenu.classList.add('active'); // apri menu
   });
 
   slideMenuClose.addEventListener('click', () => {
-    slideMenu.style.left = '-300px';
+    slideMenu.classList.remove('active'); // chiudi menu
   });
 
   buttons.forEach(button => {
