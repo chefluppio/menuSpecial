@@ -131,23 +131,23 @@
     fill: white;
   }
 
-  /* Menu a locandina */
+  /* Menu a locandina corretto */
   #slideMenu {
     position: fixed;
     top: 0;
-    left: -320px; /* menu nascosto */
+    left: 0;
     width: 300px;
     height: 100%;
     background-color: #002b5b;
     color: white;
     padding: 20px;
-    transition: left 0.3s ease;
     overflow-y: auto;
     z-index: 1000;
+    display: none; /* menu nascosto */
   }
 
   #slideMenu.active {
-    left: 0; /* menu visibile */
+    display: block; /* menu visibile */
   }
 
   #slideMenu h2 {
@@ -237,11 +237,11 @@
   const slideMenuClose = document.getElementById('slideMenuClose');
 
   menuIcon.addEventListener('click', () => {
-    slideMenu.classList.add('active'); // apri menu
+    slideMenu.classList.add('active');
   });
 
   slideMenuClose.addEventListener('click', () => {
-    slideMenu.classList.remove('active'); // chiudi menu
+    slideMenu.classList.remove('active');
   });
 
   buttons.forEach(button => {
